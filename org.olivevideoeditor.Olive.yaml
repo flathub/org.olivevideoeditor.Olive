@@ -11,7 +11,6 @@ finish-args:
   - --device=dri
   - --socket=pulseaudio
   - --filesystem=host
-  - --env=OLIVE_EFFECTS_PATH=/app/share/olive-editor/effects
 cleanup:
   - /include
   - /lib/pkgconfig
@@ -46,10 +45,7 @@ modules:
   - name: olive
     buildsystem: qmake
     builddir: true
-    post-install:
-      - install -Dt /app/bin olive-editor
-      - install -Dt /app/share/olive-editor/effects ../effects/*.*
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: 4f9c4b080a94dae04cff4c3823a0e8bc2bbc917a
+        commit: 524abe2ae5d174d41ee1e90553d0b5d967f00aa9
