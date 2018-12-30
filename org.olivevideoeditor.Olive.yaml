@@ -51,4 +51,4 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: 524abe2ae5d174d41ee1e90553d0b5d967f00aa9
+        commit: acea409a8cd24af678224e3c3b2f8ca6814a199a
