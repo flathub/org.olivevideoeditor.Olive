@@ -11,10 +11,22 @@ finish-args:
   - --device=dri
   - --socket=pulseaudio
   - --filesystem=host
+  - --env=FREI0R_PATH=/app/lib/frei0r-1
 cleanup:
   - /include
   - /lib/pkgconfig
 modules:
+
+  - name: frei0r-plugins
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://files.dyne.org/frei0r/frei0r-plugins-1.6.1.tar.gz
+        sha256: e0c24630961195d9bd65aa8d43732469e8248e8918faa942cfb881769d11515e
+
   - name: 'x264'
     config-opts:
       - --disable-cli
@@ -51,4 +63,4 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: 5cc02956f3d6bdbc407cf9f9ddb5348fcd29b956
+        commit: efc868d217c250335a7b532c65604ed00d7df407
