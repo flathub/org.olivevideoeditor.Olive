@@ -67,3 +67,4 @@ modules:
       - type: shell
         commands:
           - lrelease olive.pro
+          - rm packaging/linux/icons/1024x1024/org.olivevideoeditor.Olive.png
