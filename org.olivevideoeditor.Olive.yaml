@@ -63,8 +63,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: 7f78f544f0dc0b4b8e4102d936e7670d7652eb49
+        commit: 73ac2d52d7ca109873f507b4c0e3033697f6b166
       - type: shell
         commands:
           - lrelease olive.pro
-          - rm packaging/linux/icons/1024x1024/org.olivevideoeditor.Olive.png
