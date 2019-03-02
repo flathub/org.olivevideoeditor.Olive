@@ -47,6 +47,7 @@ modules:
       - --enable-libopus
       - --enable-libvpx
       - --enable-libx264
+      - --enable-librsvg
     cleanup:
       - /share/ffmpeg/examples
     sources:
@@ -63,7 +64,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: f4668e317a4fb39968a6bf3b03cc3d968b393c07
+        commit: f19eded76859d1ad3fd627d44336e003c5a5be7e
       - type: shell
         commands:
           - lrelease olive.pro
