@@ -78,7 +78,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: 30fe8951dbadf536a1b762f4d30a1dd1e0e97564
+        commit: 773882222b42ccc4ee38a4db69ce838d2322d693
       - type: shell
         commands:
           - lrelease olive.pro
