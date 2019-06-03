@@ -17,15 +17,19 @@ cleanup:
   - /lib/pkgconfig
 modules:
 
-  - name: frei0r-plugins
-    buildsystem: cmake-ninja
+  - name: opencolorio
+    buildsystem: cmake # ninja build broken (fixed in 2.0)
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DOCIO_BUILD_STATIC=OFF
+      - -DCMAKE_CXX_FLAGS='-Wno-error=deprecated-declarations -Wno-error=unused-function -Wno-error=cast-function-type'
+    cleanup:
+      - /bin
     sources:
       - type: archive
-        url: https://files.dyne.org/frei0r/frei0r-plugins-1.6.1.tar.gz
-        sha256: e0c24630961195d9bd65aa8d43732469e8248e8918faa942cfb881769d11515e
+        url: https://github.com/imageworks/OpenColorIO/archive/v1.1.1.tar.gz
+        sha256: c9b5b9def907e1dafb29e37336b702fff22cc6306d445a13b1621b8a754c14c8
 
   - name: 'x264'
     config-opts:
@@ -77,4 +81,5 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: 8cef5ce94d01063fc497fa44894e3253ed6a7413
+        commit: 1e3cf5337c51f62ef894e375c961dc6631c6a26b
+        tag: '0.1.0'
