@@ -85,5 +85,5 @@ modules:
         tag: '0.1.0'
       - type: shell
         commands:
-          - sed -i '34i <release version=\"0.1.0\" date=\"2019-05-02\"/>'
+          - sed -i 's/20181223/0.1.0/;s/2018-12-23/2019-05-02/'
             packaging/linux/org.olivevideoeditor.Olive.appdata.xml
