@@ -81,9 +81,9 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: 85b5bbd5d6fb97ef215efd118b3fc156ebfba9bd
+        commit: 06f195eca1f558097e7944a5ac29f52838ddc12b
       - type: shell
         commands:
-          - sed -i -e '34i <release version=\"0.1.0git\" date=\"2019-07-06\"/>' -e '34,35d'
+          - sed -i -e '34i <release version=\"0.1.0git\" date=\"2019-07-07\"/>' -e '34,35d'
             app/packaging/linux/org.olivevideoeditor.Olive.appdata.xml
           - sed -i -e '/share\/olive-editor\/effects/d' -e '/share\/olive-editor\/ts/d' app/CMakeLists.txt
