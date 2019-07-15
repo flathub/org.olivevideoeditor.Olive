@@ -70,8 +70,8 @@ modules:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://www.ffmpeg.org/releases/ffmpeg-4.1.3.tar.xz
-        sha256: 0c3020452880581a8face91595b239198078645e7d7184273b8bcc7758beb63d
+        url: https://www.ffmpeg.org/releases/ffmpeg-4.1.4.tar.xz
+        sha256: f1f049a82fcfbf156564e73a3935d7e750891fab2abf302e735104fd4050a7e1
 
   - name: olive
     buildsystem: cmake-ninja
@@ -81,9 +81,4 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: 06f195eca1f558097e7944a5ac29f52838ddc12b
-      - type: shell
-        commands:
-          - sed -i -e '34i <release version=\"0.1.0git\" date=\"2019-07-07\"/>' -e '34,35d'
-            app/packaging/linux/org.olivevideoeditor.Olive.appdata.xml
-          - sed -i -e '/share\/olive-editor\/effects/d' -e '/share\/olive-editor\/ts/d' app/CMakeLists.txt
+        commit: 4cfa7489ea0882739b12edeca38a1c1a96761360
