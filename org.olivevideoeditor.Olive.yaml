@@ -1,5 +1,5 @@
 app-id: org.olivevideoeditor.Olive
-branch: stable
+default-branch: stable
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
 runtime-version: '5.13'
@@ -80,9 +80,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: 8ed30a1ef6676d62c24e792593399e9d5d108756
-        tag: '0.1.1'
+        commit: ccea670d4dd683ebf4f88862ac0000c0f9d45db2
       - type: shell
         commands:
-          - sed -i -e '34i <release version=\"0.1.1\" date=\"2019-08-22\"/>' -e '34,35d'
+          - sed -i -e '34i <release version="0.1.1" date="2019-08-22"/>' -e '34,35d'
             packaging/linux/org.olivevideoeditor.Olive.appdata.xml
