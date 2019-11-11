@@ -80,7 +80,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: ccea670d4dd683ebf4f88862ac0000c0f9d45db2
+        commit: a449b04bbd8bbda0b8d7c6faebd9c408e1fc24d7
       - type: shell
         commands:
           - sed -i -e '34i <release version="0.1.1" date="2019-08-22"/>' -e '34,35d'
