@@ -80,8 +80,5 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: a449b04bbd8bbda0b8d7c6faebd9c408e1fc24d7
-      - type: shell
-        commands:
-          - sed -i -e '34i <release version="0.1.1" date="2019-08-22"/>' -e '34,35d'
-            packaging/linux/org.olivevideoeditor.Olive.appdata.xml
+        # branch: 0.1.x
+        commit: 33bc05a6473efc87c4f7e7cfaf45c76088edff46
