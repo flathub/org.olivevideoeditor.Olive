@@ -17,7 +17,7 @@ cleanup:
   - /lib/pkgconfig
 modules:
 
-  - name: OpenColorIO
+  - name: opencolorio
     buildsystem: cmake # ninja build broken (fixed in 2.0)
     builddir: true
     config-opts:
@@ -30,61 +30,6 @@ modules:
       - type: archive
         url: https://github.com/imageworks/OpenColorIO/archive/v1.1.1.tar.gz
         sha256: c9b5b9def907e1dafb29e37336b702fff22cc6306d445a13b1621b8a754c14c8
-
-  - name: boost
-    buildsystem: simple
-    build-commands:
-      - ./bootstrap.sh --prefix=/app --with-libraries=system,filesystem,thread
-      - ./b2 install variant=release link=shared runtime-link=shared cxxflags="$CXXFLAGS" linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS
-    sources:
-      - type: archive
-        url: https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.tar.bz2
-        sha256: 59c9b274bc451cf91a9ba1dd2c7fdcaf5d60b1b3aa83f2c9fa143417cc660722
-
-  - name: openexr
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    cleanup:
-      - /bin
-      - /share/doc
-    sources:
-      - type: archive
-        url: https://github.com/AcademySoftwareFoundation/openexr/archive/v2.4.1.tar.gz
-        sha256: 3ebbe9a8e67edb4a25890b98c598e9fe23b10f96d1416d6a3ff0732e99d001c1
-
-  - name: fmtlib
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DFMT_TEST=OFF
-    sources:
-      - type: archive
-        url: https://github.com/fmtlib/fmt/archive/6.1.2.tar.gz
-        sha256: 1cafc80701b746085dddf41bd9193e6d35089e1c6ec1940e037fcb9c98f62365
-
-  - name: robin-map
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://github.com/Tessil/robin-map/archive/v0.6.2.tar.gz
-        sha256: c08ec4b1bf1c85eb0d6432244a6a89862229da1cb834f3f90fba8dc35d8c8ef1
-
-  - name: OpenImageIO
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DUSE_PYTHON=OFF
-    sources:
-      - type: archive
-        url: https://github.com/OpenImageIO/oiio/archive/Release-2.1.12.0.tar.gz
-        sha256: da27e191349ef473220c7a373921e6d4c69d9924acd87140af55ce9d00ad58f8
 
   - name: 'x264'
     config-opts:
@@ -136,4 +81,4 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: 4bc5378116771266dad9120ccd22ec446e3dc359
+        commit: ed82061b516a291653941b9ff5bc25329e0bfc7a
