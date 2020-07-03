@@ -191,6 +191,7 @@ modules:
       - --enable-librsvg
       - --enable-libx264
       - --enable-libx265
+      - --enable-libmp3lame
     cleanup:
       - /share/ffmpeg/examples
     sources:
