@@ -1,0 +1,44 @@
+diff -ur olive/effects/internal/texteffect.cpp olive_new/effects/internal/texteffect.cpp
+--- olive/effects/internal/texteffect.cpp	2020-04-15 19:22:06.000000000 +0200
++++ olive_new/effects/internal/texteffect.cpp	2020-10-06 23:17:32.574871711 +0200
+@@ -32,6 +32,7 @@
+ #include <QWidget>
+ #include <QtMath>
+ #include <QMenu>
++#include <QPainterPath>
+ 
+ #include "ui/labelslider.h"
+ #include "ui/collapsiblewidget.h"
+diff -ur olive/effects/internal/timecodeeffect.cpp olive_new/effects/internal/timecodeeffect.cpp
+--- olive/effects/internal/timecodeeffect.cpp	2020-04-15 19:22:06.000000000 +0200
++++ olive_new/effects/internal/timecodeeffect.cpp	2020-10-06 23:18:10.433974758 +0200
+@@ -32,6 +32,7 @@
+ #include <QWidget>
+ #include <QtMath>
+ #include <QDebug>
++#include <QPainterPath>
+ 
+ #include "ui/labelslider.h"
+ #include "ui/collapsiblewidget.h"
+diff -ur olive/ui/graphview.cpp olive_new/ui/graphview.cpp
+--- olive/ui/graphview.cpp	2020-04-15 19:22:06.000000000 +0200
++++ olive_new/ui/graphview.cpp	2020-10-06 23:31:30.846977936 +0200
+@@ -23,6 +23,7 @@
+ #include <QPainter>
+ #include <QMouseEvent>
+ #include <QtMath>
++#include <QPainterPath>
+ #include <cfloat>
+ 
+ #include "global/config.h"
+diff -ur olive/ui/timelineheader.cpp olive_new/ui/timelineheader.cpp
+--- olive/ui/timelineheader.cpp	2020-04-15 19:22:06.000000000 +0200
++++ olive_new/ui/timelineheader.cpp	2020-10-06 23:32:00.942262942 +0200
+@@ -25,6 +25,7 @@
+ #include <QScrollBar>
+ #include <QtMath>
+ #include <QAction>
++#include <QPainterPath>
+ 
+ #include "mainwindow.h"
+ #include "panels/panels.h"
