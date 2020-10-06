@@ -83,3 +83,5 @@ modules:
         url: https://github.com/olive-editor/olive.git
         # branch: 0.1.x
         commit: 2c700ca29696e1c255b425f651aba769e3b0f065
+      - type: patch
+        path: olive-qt515.patch
