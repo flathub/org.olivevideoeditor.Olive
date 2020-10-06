@@ -3,7 +3,7 @@ default-branch: beta
 desktop-file-name-suffix: ' (Beta)'
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
-runtime-version: '5.14'
+runtime-version: '5.15'
 command: olive-editor
 finish-args:
   - --socket=wayland
@@ -105,8 +105,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://bitbucket.org/multicoreware/x265/downloads/x265_3.3.tar.gz
-        sha256: f26e148ed1f4dfb33fd1eb3ff5e60e08078d1b2017e88bcbb045b3fb58300b9c
+        url: https://deb.debian.org/debian/pool/main/x/x265/x265_3.4.orig.tar.gz
+        sha256: c2047f23a6b729e5c70280d23223cb61b57bfe4ad4e8f1471eeee2a61d148672
 
   - name: ffmpeg
     config-opts:
@@ -136,4 +136,4 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: 115e62f1403b03a326fe98e099ae56cce528a5e5
+        commit: ac4be0907f73400e60cbb373d539ef32fea39f9c
