@@ -23,6 +23,11 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DOCIO_BUILD_STATIC=OFF
       - -DCMAKE_CXX_FLAGS='-Wno-error=deprecated-declarations -Wno-error=unused-function -Wno-error=cast-function-type'
+    build-options:
+      arch:
+        aarch64:
+          config-opts:
+            - -DOCIO_USE_SSE=NO
     cleanup:
       - /bin
     sources:
@@ -85,3 +90,5 @@ modules:
         commit: 2c700ca29696e1c255b425f651aba769e3b0f065
       - type: patch
         path: olive-qt515.patch
+      - type: patch
+        path: olive-gl.patch

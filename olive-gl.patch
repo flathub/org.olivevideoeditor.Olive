@@ -1,0 +1,71 @@
+--- olive/effects/internal/shakeeffect.cpp	2020-11-22 09:19:53.242149028 -0500
++++ olive/effects/internal/shakeeffect.cpp-new	2020-11-22 09:24:42.258656811 -0500
+@@ -24,6 +24,7 @@
+ #include <QLabel>
+ #include <QtMath>
+ #include <QOpenGLFunctions>
++#include <GL/gl.h>
+ 
+ #include "ui/labelslider.h"
+ #include "ui/collapsiblewidget.h"
+--- olive/effects/internal/transformeffect.cpp	2020-11-22 09:25:31.090403335 -0500
++++ olive/effects/internal/transformeffect.cpp-new	2020-11-22 09:28:15.601647867 -0500
+@@ -28,6 +28,7 @@
+ #include <QOpenGLFunctions>
+ #include <QComboBox>
+ #include <QMouseEvent>
++#include <GL/gl.h>
+ 
+ #include "ui/collapsiblewidget.h"
+ #include "timeline/clip.h"
+--- olive/effects/effect.cpp	2020-11-22 09:29:12.601350657 -0500
++++ olive/effects/effect.cpp-new	2020-11-22 09:33:13.931935846 -0500
+@@ -32,6 +32,7 @@
+ #include <QMenu>
+ #include <QApplication>
+ #include <QFileDialog>
++#include <GL/gl.h>
+ 
+ #include "panels/panels.h"
+ #include "panels/viewer.h"
+--- olive/rendering/renderthread.cpp	2020-11-22 09:33:37.835786679 -0500
++++ olive/rendering/renderthread.cpp-new	2020-11-22 09:39:16.057595045 -0500
+@@ -29,6 +29,7 @@
+ #include <OpenColorIO/OpenColorIO.h>
+ namespace OCIO = OCIO_NAMESPACE;
+ #endif
++#include <GL/gl.h>
+ 
+ #include "rendering/renderfunctions.h"
+ #include "timeline/sequence.h"
+--- olive/rendering/renderfunctions.cpp	2020-11-22 09:33:37.835786679 -0500
++++ olive/rendering/renderfunctions.cpp-new	2020-11-22 09:39:47.005389948 -0500
+@@ -28,6 +28,7 @@
+ #include <QApplication>
+ #include <QDesktopWidget>
+ #include <QDebug>
++#include <GL/gl.h>
+ 
+ #ifdef OLIVE_OCIO
+ #include <OpenColorIO/OpenColorIO.h>
+--- olive/ui/viewerwindow.cpp	2020-11-22 09:40:26.877125085 -0500
++++ olive/ui/viewerwindow.cpp-new	2020-11-22 09:45:02.285589378 -0500
+@@ -31,6 +31,8 @@
+ 
+ #include <QDebug>
+ 
++#include <GL/gl.h>
++
+ #include "mainwindow.h"
+ 
+ ViewerWindow::ViewerWindow(QWidget *parent) :
+--- olive/ui/viewerwidget.cpp	2020-11-22 09:40:26.877125085 -0500
++++ olive/ui/viewerwidget.cpp-new	2020-11-22 09:45:50.812704079 -0500
+@@ -40,6 +40,7 @@
+ #include <QApplication>
+ #include <QScreen>
+ #include <QMessageBox>
++#include <GL/gl.h>
+ 
+ #include "panels/panels.h"
+ #include "project/projectelements.h"
