@@ -149,6 +149,11 @@ modules:
       - -DOCIO_BUILD_TESTS=OFF
       - -DOCIO_BUILD_GPU_TESTS=OFF
       - -DOCIO_BUILD_PYTHON=OFF
+    build-options:
+      arch:
+        aarch64:
+          config-opts:
+            - -DOCIO_USE_SSE=NO
     cleanup:
       - /bin
     sources:
