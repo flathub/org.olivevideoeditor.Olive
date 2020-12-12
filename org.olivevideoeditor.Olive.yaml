@@ -18,18 +18,18 @@ cleanup:
 modules:
 
   - name: OpenColorIO
-    buildsystem: cmake # ninja build broken (fixed in 2.0)
+    buildsystem: cmake-ninja
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DOCIO_BUILD_STATIC=OFF
-      - -DCMAKE_CXX_FLAGS='-Wno-error=deprecated-declarations -Wno-error=unused-function -Wno-error=cast-function-type'
     cleanup:
       - /bin
     sources:
-      - type: archive
-        url: https://github.com/imageworks/OpenColorIO/archive/v1.1.1.tar.gz
-        sha256: c9b5b9def907e1dafb29e37336b702fff22cc6306d445a13b1621b8a754c14c8
+      - type: git
+        url: https://github.com/AcademySoftwareFoundation/OpenColorIO.git
+        commit: a712243771660fa5094a9409fcfa1076cf6decd5
+        tag: v2.0.0-beta2
 
   - name: boost
     buildsystem: simple
@@ -125,8 +125,8 @@ modules:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://www.ffmpeg.org/releases/ffmpeg-4.2.2.tar.xz
-        sha256: cb754255ab0ee2ea5f66f8850e1bd6ad5cac1cd855d0a2f4990fb8c668b0d29c
+        url: https://www.ffmpeg.org/releases/ffmpeg-4.2.4.tar.xz
+        sha256: 0d5da81feba073ee78e0f18e0966bcaf91464ae75e18e9a0135186249e3d2a0b
 
   - name: olive
     buildsystem: cmake-ninja
@@ -136,4 +136,4 @@ modules:
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
-        commit: ac4be0907f73400e60cbb373d539ef32fea39f9c
+        commit: 0699795c6f2e81d7c1594f9815dde11468e9c791
