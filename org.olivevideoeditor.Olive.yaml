@@ -14,7 +14,11 @@ finish-args:
   - --filesystem=host
 cleanup:
   - /include
+  - /lib/cmake
   - /lib/pkgconfig
+  - /lib/*.a
+  - /lib/*.la
+  - /share/cmake
 modules:
 
   - name: openexr
@@ -69,9 +73,11 @@ modules:
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      # - -DBoost_ROOT=/app/include/boost
-      - -DUSE_PYTHON=OFF
       - -DVERBOSE=ON
+      - -DOIIO_BUILD_TOOLS=OFF
+      - -DOIIO_BUILD_TESTS=OFF
+      - -DBUILD_DOCS=OFF
+      - -DUSE_PYTHON=OFF
     sources:
       - type: git
         url: https://github.com/OpenImageIO/oiio.git
@@ -113,7 +119,6 @@ modules:
       - -DOCIO_BUILD_TESTS=OFF
       - -DOCIO_BUILD_GPU_TESTS=OFF
       - -DOCIO_BUILD_PYTHON=OFF
-      # - -Dpystring_INCLUDE_DIR=/app/include
     cleanup:
       - /bin
     sources:
