@@ -17,30 +17,6 @@ cleanup:
   - /lib/pkgconfig
 modules:
 
-  - name: OpenColorIO
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DOCIO_BUILD_STATIC=OFF
-    cleanup:
-      - /bin
-    sources:
-      - type: git
-        url: https://github.com/AcademySoftwareFoundation/OpenColorIO.git
-        commit: a712243771660fa5094a9409fcfa1076cf6decd5
-        tag: v2.0.0-beta2
-
-  - name: boost
-    buildsystem: simple
-    build-commands:
-      - ./bootstrap.sh --prefix=/app --with-libraries=system,filesystem,thread
-      - ./b2 install variant=release link=shared runtime-link=shared cxxflags="$CXXFLAGS" linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS
-    sources:
-      - type: archive
-        url: https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.tar.bz2
-        sha256: 59c9b274bc451cf91a9ba1dd2c7fdcaf5d60b1b3aa83f2c9fa143417cc660722
-
   - name: openexr
     buildsystem: cmake-ninja
     builddir: true
@@ -50,9 +26,10 @@ modules:
       - /bin
       - /share/doc
     sources:
-      - type: archive
-        url: https://github.com/AcademySoftwareFoundation/openexr/archive/v2.4.1.tar.gz
-        sha256: 3ebbe9a8e67edb4a25890b98c598e9fe23b10f96d1416d6a3ff0732e99d001c1
+      - type: git
+        url: https://github.com/AcademySoftwareFoundation/openexr.git
+        commit: c32f82c5f1833d959321fc5f615ca52836c7ba65
+        tag: v2.5.3
 
   - name: fmtlib
     buildsystem: cmake-ninja
@@ -61,9 +38,10 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DFMT_TEST=OFF
     sources:
-      - type: archive
-        url: https://github.com/fmtlib/fmt/archive/6.1.2.tar.gz
-        sha256: 1cafc80701b746085dddf41bd9193e6d35089e1c6ec1940e037fcb9c98f62365
+      - type: git
+        url: https://github.com/fmtlib/fmt.git
+        commit: 7bdf0628b1276379886c7f6dda2cef2b3b374f0b
+        tag: '7.1.3'
 
   - name: robin-map
     buildsystem: cmake-ninja
@@ -71,38 +49,95 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
+      - type: git
+        url: https://github.com/Tessil/robin-map.git
+        commit: 622443f40544fb6a693402e69c1328d685eac939
+        tag: v0.6.3
+
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=/app --with-libraries=filesystem,system,thread
+      - ./b2 install variant=release link=shared runtime-link=shared cxxflags="$CXXFLAGS" linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS
+    sources:
       - type: archive
-        url: https://github.com/Tessil/robin-map/archive/v0.6.2.tar.gz
-        sha256: c08ec4b1bf1c85eb0d6432244a6a89862229da1cb834f3f90fba8dc35d8c8ef1
+        url: https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.tar.bz2
+        sha256: 83bfc1507731a0906e387fc28b7ef5417d591429e51e788417fe9ff025e116b1
 
   - name: OpenImageIO
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      # - -DBoost_ROOT=/app/include/boost
       - -DUSE_PYTHON=OFF
+      - -DVERBOSE=ON
     sources:
-      - type: archive
-        url: https://github.com/OpenImageIO/oiio/archive/Release-2.1.12.0.tar.gz
-        sha256: da27e191349ef473220c7a373921e6d4c69d9924acd87140af55ce9d00ad58f8
+      - type: git
+        url: https://github.com/OpenImageIO/oiio.git
+        commit: 99d6947b8d10a0467c47f14cf6006060f22473c6
+        tag: Release-2.2.9.0
+
+  - name: yaml-cpp
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+      - -DYAML_CPP_BUILD_TESTS=OFF
+    sources:
+      - type: git
+        url: https://github.com/jbeder/yaml-cpp.git
+        commit: 9a3624205e8774953ef18f57067b3426c1c5ada6
+        tag: yaml-cpp-0.6.3
+
+  - name: pystring
+    buildsystem: simple
+    build-commands:
+      - sed -e 's|/usr|/app|g' -i Makefile
+      - make -j $FLATPAK_BUILDER_N_JOBS install
+      - install -Dm644 pystring.h -t /app/include/pystring
+    sources:
+      - type: git
+        url: https://github.com/imageworks/pystring.git
+        commit: c2de99deb4f0bd13751f8436400b5e8662301769
+        tag: v1.1.3
+
+  - name: OpenColorIO
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DOCIO_BUILD_STATIC=OFF
+      - -DOCIO_BUILD_APPS=OFF
+      - -DOCIO_BUILD_TESTS=OFF
+      - -DOCIO_BUILD_GPU_TESTS=OFF
+      - -DOCIO_BUILD_PYTHON=OFF
+      # - -Dpystring_INCLUDE_DIR=/app/include
+    cleanup:
+      - /bin
+    sources:
+      - type: git
+        url: https://github.com/AcademySoftwareFoundation/OpenColorIO.git
+        commit: a712243771660fa5094a9409fcfa1076cf6decd5
+        tag: v2.0.0-beta2
 
   - name: 'x264'
     config-opts:
       - --disable-cli
       - --enable-shared
     sources:
-      - type: archive
-        url: https://download.videolan.org/x264/snapshots/x264-snapshot-20190305-2245-stable.tar.bz2
-        sha256: be52c96ef8bd930fbc1ecff03abac9b94976b444ea7641345e08e20d9e594d16
+      - type: git
+        url: https://code.videolan.org/videolan/x264.git
+        commit: d198931a63049db1f2c92d96c34904c69fde8117
 
   - name: 'x265'
     buildsystem: cmake-ninja
     builddir: true
     subdir: source
     config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
-    cleanup:
-      - /bin
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DENABLE_CLI=OFF
     sources:
       - type: archive
         url: https://deb.debian.org/debian/pool/main/x/x265/x265_3.4.orig.tar.gz
