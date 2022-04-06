@@ -2,7 +2,7 @@ app-id: org.olivevideoeditor.Olive
 default-branch: stable
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
-runtime-version: '5.15'
+runtime-version: '5.15-21.08'
 command: olive-editor
 finish-args:
   - --socket=wayland
@@ -34,6 +34,8 @@ modules:
       - type: archive
         url: https://github.com/imageworks/OpenColorIO/archive/v1.1.1.tar.gz
         sha256: c9b5b9def907e1dafb29e37336b702fff22cc6306d445a13b1621b8a754c14c8
+      - type: patch
+        path: opencolorio-nowerror.patch
 
   - name: 'x264'
     config-opts:
