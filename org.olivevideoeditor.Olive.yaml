@@ -81,8 +81,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/OpenImageIO/oiio.git
-        commit: 99d6947b8d10a0467c47f14cf6006060f22473c6
-        tag: Release-2.2.9.0
+        commit: 8c1ab4bb18a22caccd6227ddbdbfc9176a941d71
+        tag: v2.2.20.0
 
   - name: yaml-cpp
     buildsystem: cmake-ninja
@@ -206,6 +206,18 @@ modules:
       - type: archive
         url: https://github.com/PortAudio/portaudio/archive/refs/tags/v19.7.0.tar.gz
         sha256: 5af29ba58bbdbb7bbcefaaecc77ec8fc413f0db6f4c4e286c40c3e1b83174fa0
+
+  - name: OpenTimelineIO
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_CXX_STANDARD=17
+      - -DOTIO_PYTHON_INSTALL=OFF
+    sources:
+      - type: git
+        url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO.git
+        commit: 8cdda64f5ef924855ce503822e1aeb125e6b011e
+        tag: v0.14.1
 
   - name: olive
     buildsystem: cmake-ninja
