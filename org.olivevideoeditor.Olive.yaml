@@ -235,3 +235,5 @@ modules:
       - type: git
         url: https://github.com/olive-editor/olive.git
         commit: 305fa955533d1ecc09a552f102e257554753650e
+      - type: patch
+        path: olive-gl.patch

@@ -1,0 +1,10 @@
+--- olive/app/render/opengl/openglrenderer.cpp	2022-07-02 00:36:06.864379900 +0200
++++ olive/app/render/opengl/openglrenderer.cpp	2022-07-02 00:38:11.786900110 +0200
+@@ -24,6 +24,7 @@
+ #include <QDateTime>
+ #include <QDebug>
+ #include <QOpenGLExtraFunctions>
++#include <GL/gl.h>
+ 
+ namespace olive {
+ 
