@@ -230,6 +230,7 @@ modules:
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DUSE_WERROR=OFF
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
