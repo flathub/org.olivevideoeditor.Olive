@@ -1,9 +1,10 @@
 app-id: org.olivevideoeditor.Olive
-default-branch: stable
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
-runtime-version: '5.15-21.08'
+runtime-version: '5.15-23.08'
 command: olive-editor
+rename-mime-icons:
+  - application-vnd.olive-project
 finish-args:
   - --socket=wayland
   - --socket=x11
@@ -35,7 +36,7 @@ modules:
         url: https://github.com/imageworks/OpenColorIO/archive/v1.1.1.tar.gz
         sha256: c9b5b9def907e1dafb29e37336b702fff22cc6306d445a13b1621b8a754c14c8
       - type: patch
-        path: opencolorio-nowerror.patch
+        path: patches/opencolorio-nowerror.patch
 
   - name: 'x264'
     config-opts:
@@ -79,6 +80,8 @@ modules:
       - type: archive
         url: https://www.ffmpeg.org/releases/ffmpeg-4.2.3.tar.xz
         sha256: 9df6c90aed1337634c1fb026fb01c154c29c82a64ea71291ff2da9aacb9aad31
+      - type: patch
+        path: patches/ffmpeg-as-fix.patch
 
   - name: olive
     buildsystem: cmake-ninja
@@ -91,6 +94,7 @@ modules:
         # branch: 0.1.x
         commit: 2c700ca29696e1c255b425f651aba769e3b0f065
       - type: patch
-        path: olive-qt515.patch
-      - type: patch
-        path: olive-gl.patch
+        paths:
+          - patches/olive-qt515.patch
+          - patches/olive-gl.patch
+          - patches/olive-metainfo.patch
