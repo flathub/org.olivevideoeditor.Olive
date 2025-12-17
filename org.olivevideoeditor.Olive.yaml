@@ -1,7 +1,7 @@
 app-id: org.olivevideoeditor.Olive
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
-runtime-version: '5.15-23.08'
+runtime-version: '5.15-25.08'
 command: olive-editor
 rename-mime-icons:
   - application-vnd.olive-project
@@ -17,12 +17,55 @@ cleanup:
   - /lib/pkgconfig
 modules:
 
+  - name: boost
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://sourceforge.net/projects/boost/files/boost/1.80.0/boost_1_80_0.tar.bz2
+        sha256: 1e19565d82e43bc59209a168f5ac899d3ba471d55c7610c677d4ccf2c9c500c0
+    build-commands:
+      - "./bootstrap.sh --prefix=/app --with-libraries=system,filesystem,thread,wave"
+      - "./b2 install variant=release link=shared runtime-link=shared -j $FLATPAK_BUILDER_N_JOBS"
+
+
+  - name: yaml-cpp
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+      # Must be static for opencolorio
+      - -DBUILD_SHARED_LIBS=OFF
+      - -DYAML_BUILD_SHARED_LIBS=OFF
+      - -DYAML_CPP_BUILD_TOOLS=OFF
+      - -DYAML_CPP_BUILD_TESTS=OFF
+      - -DYAML_CPP_BUILD_CONTRIB=OFF
+    sources:
+      - type: archive
+        url: https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.6.3.tar.gz
+        sha256: 77ea1b90b3718aa0c324207cb29418f5bced2354c2e483a9523d98c3460af1ed
+  - name: tinyxml
+    config-opts:
+      - --disable-static
+    sources:
+      - type: archive
+        url: http://sources.buildroot.net/tinyxml/tinyxml-2.6.2_2.tar.gz
+        sha256: 8164c9ad48b9028667768a584d62f7760cfbfb90d0dd6214ad174403058da10c
+      - type: script
+        dest-filename: autogen.sh
+        commands:
+          - autoreconf -vfi
+
   - name: opencolorio
     buildsystem: cmake # ninja build broken (fixed in 2.0)
     builddir: true
     config-opts:
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
       - -DOCIO_BUILD_STATIC=OFF
+      - -DUSE_EXTERNAL_YAML=ON
+      - -DUSE_EXTERNAL_TINYXML=ON
       - -DCMAKE_CXX_FLAGS='-Wno-error=deprecated-declarations -Wno-error=unused-function -Wno-error=cast-function-type'
     build-options:
       arch:
@@ -52,6 +95,7 @@ modules:
     builddir: true
     subdir: source
     config-opts:
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DCMAKE_BUILD_TYPE=Release
     cleanup:
       - /bin
@@ -59,6 +103,8 @@ modules:
       - type: archive
         url: https://deb.debian.org/debian/pool/main/x/x265/x265_3.4.orig.tar.gz
         sha256: c2047f23a6b729e5c70280d23223cb61b57bfe4ad4e8f1471eeee2a61d148672
+      - type: patch
+        path: patches/x265-cmake.patch
 
   - name: ffmpeg
     config-opts:
@@ -86,8 +132,21 @@ modules:
   - name: olive
     buildsystem: cmake-ninja
     builddir: true
+    build-options:
+      prepend-pkg-config-path: /app/lib/pkgconfig
+      prepend-ld-library-path: /app/lib
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      # All of these are to pick the build version instead of the
+      # one in the runtime.
+      - -DFFMPEG_avutil_INCLUDE_DIR=/app/include
+      - -DFFMPEG_avutil_LIBRARY=/app/lib/libavutil.so
+      - -DFFMPEG_avcodec_LIBRARY=/app/lib/libavcodec.so
+      - -DFFMPEG_avfilter_LIBRARY=/app/lib/libavfilter.so
+      - -DFFMPEG_avformat_LIBRARY=/app/lib/libavformat.so
+      - -DFFMPEG_swresample_INCLUDE_DIR=/app/include
+      - -DFFMPEG_swresample_LIBRARY=/app/lib/libswresample.so
+      - -DFFMPEG_swscale_LIBRARY=/app/lib/libswscale.so
     sources:
       - type: git
         url: https://github.com/olive-editor/olive.git
