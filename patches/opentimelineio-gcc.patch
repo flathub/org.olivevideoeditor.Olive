@@ -1,0 +1,12 @@
+diff --git a/src/opentime/rationalTime.h b/src/opentime/rationalTime.h
+index be38d50..c099da2 100644
+--- a/src/opentime/rationalTime.h
++++ b/src/opentime/rationalTime.h
+@@ -3,6 +3,7 @@
+ #include "opentime/errorStatus.h"
+ #include "opentime/version.h"
+ #include <cmath>
++#include <cstdint>
+ #include <limits>
+ #include <string>
+ 
