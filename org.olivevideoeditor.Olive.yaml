@@ -6,7 +6,6 @@ command: olive-editor
 rename-mime-icons:
   - application-vnd.olive-project
 finish-args:
-  - --socket=wayland
   - --socket=x11
   - --share=ipc
   - --device=dri
