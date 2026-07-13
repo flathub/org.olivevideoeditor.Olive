@@ -106,6 +106,7 @@ modules:
       - type: patch
         path: patches/x265-cmake.patch
 
+  # This is the version Olive needs. The one in the runtime will no work.
   - name: ffmpeg
     config-opts:
       - --disable-static
@@ -151,9 +152,9 @@ modules:
       - type: git
         url: https://github.com/olive-editor/olive.git
         # branch: 0.1.x
-        commit: 2c700ca29696e1c255b425f651aba769e3b0f065
+        # latest fixes
+        commit: 67bfa9d46503c464167c26e6a5a0a7ae7096e757
       - type: patch
         paths:
-          - patches/olive-qt515.patch
           - patches/olive-gl.patch
           - patches/olive-metainfo.patch
