@@ -14,6 +14,9 @@ finish-args:
 cleanup:
   - /include
   - /lib/pkgconfig
+  - /lib/cmake
+  - /share/doc
+  - '*.a'
 modules:
 
   - name: boost
@@ -46,6 +49,8 @@ modules:
   - name: tinyxml
     config-opts:
       - --disable-static
+    cleanup:
+      - /bin
     sources:
       - type: archive
         url: http://sources.buildroot.net/tinyxml/tinyxml-2.6.2_2.tar.gz
@@ -73,6 +78,8 @@ modules:
             - -DOCIO_USE_SSE=NO
     cleanup:
       - /bin
+      - '*.cmake'
+      - /cmake
     sources:
       - type: archive
         url: https://github.com/imageworks/OpenColorIO/archive/v1.1.1.tar.gz
